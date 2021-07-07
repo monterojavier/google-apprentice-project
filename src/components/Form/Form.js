@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { Input, Button } from "@chakra-ui/react";
 
 import "./Form.css";
 
 function Form(props) {
   const [input, setInput] = useState("");
+
+  const inputRef = useRef(null);
+
+  useEffect(() => inputRef.current.focus());
 
   const handleChange = (event) => {
     setInput(event.target.value);
@@ -21,16 +26,28 @@ function Form(props) {
   };
 
   return (
-    <form className="shopping-list-form" onSubmit={handleOnSubmit}>
-      <input
+    <form
+      type="submit"
+      className="shopping-list-form"
+      onSubmit={handleOnSubmit}
+    >
+      <Input
         type="text"
         placeholder="Add to list"
         value={input}
         name="text"
         className="shopping-list-input"
         onChange={handleChange}
+        ref={inputRef}
       />
-      <button className="shopping-list-button">Add to List</button>
+      <Button
+        type="button"
+        className="shopping-list-button"
+        colorScheme="green"
+        onClick={handleOnSubmit}
+      >
+        Add
+      </Button>
     </form>
   );
 }
