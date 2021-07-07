@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "../Form/Form";
 import Item from "../Item/Item";
+import { Button } from "@chakra-ui/react";
 
 function List() {
   const [items, setItems] = useState([]);
@@ -11,13 +12,17 @@ function List() {
     const newItems = [item, ...items];
 
     setItems(newItems);
-    console.log(...items);
+    console.log(item, ...items);
   };
 
   const removeItem = (id) => {
     const removeArr = [...items].filter((item) => item.id !== id);
 
     setItems(removeArr);
+  };
+
+  const removeAll = () => {
+    setItems([]);
   };
 
   const editItem = (itemId, newValue) => {
@@ -42,6 +47,9 @@ function List() {
     <div>
       <h1>Shopping List</h1>
       <Form onSubmit={addItems} />
+      <Button colorScheme="red" onClick={removeAll}>
+        Clear
+      </Button>
       <Item
         items={items}
         completeItem={completeItem}

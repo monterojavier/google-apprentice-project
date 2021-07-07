@@ -2,22 +2,19 @@
 
 ## Project N - Shopping List
 
-
-
 Build a simple webapp that provides users with an ability to keep track of a shopping list :scroll:
 
 ## Features:
 
-[ ] User must be able to add an item to the shopping list <br />
-[ ] User must be able to view their whole shopping list <br />
-[ ] User must be able to delete an individual item from the shopping list <br />
-[ ] User must be able to delete their entire shopping list, with a single button click (without going and deleting each individual item one by one) <br />
+[ x ] User must be able to add an item to the shopping list <br />
+[ x ] User must be able to view their whole shopping list <br />
+[ x ] User must be able to delete an individual item from the shopping list <br />
+[ x ] User must be able to delete their entire shopping list, with a single button click (without going and deleting each individual item one by one) <br />
 [ ] Each user must be able to login with their Google account and their shopping list must persist between their logins <br />
 
 ## Technologies
 
 - React
-
 
 ### Available Scripts
 
@@ -55,4 +52,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
