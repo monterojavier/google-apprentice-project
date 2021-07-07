@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Form from "../Form/Form";
 import Item from "../Item/Item";
-import { Button } from "@chakra-ui/react";
+import { Button, Container } from "@chakra-ui/react";
+
+import "./List.css";
 
 function List() {
   const [items, setItems] = useState([]);
@@ -44,19 +46,22 @@ function List() {
   };
 
   return (
-    <div>
+    <Container id="list">
       <h1>Shopping List</h1>
-      <Form onSubmit={addItems} />
-      <Button colorScheme="red" onClick={removeAll}>
-        Clear
-      </Button>
+
+      <Container className="shopping-list-form">
+        <Form onSubmit={addItems} />
+        <Button colorScheme="red" onClick={removeAll}>
+          Clear
+        </Button>
+      </Container>
       <Item
         items={items}
         completeItem={completeItem}
         removeItem={removeItem}
         editItem={editItem}
       />
-    </div>
+    </Container>
   );
 }
 
