@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Form from "../Form/Form";
 import Item from "../Item/Item";
+import Logout from "../Logout/Logout";
 import { Button, Container } from "@chakra-ui/react";
 
 import "./List.css";
@@ -61,6 +62,9 @@ function List() {
         removeItem={removeItem}
         editItem={editItem}
       />
+      <Container>
+        <Logout />
+      </Container>
     </Container>
   );
 }
