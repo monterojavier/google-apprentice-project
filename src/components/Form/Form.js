@@ -1,28 +1,39 @@
-import React, { useState, useRef, useEffect } from "react";
+import "./Form.css";
+
+import React, { useState } from "react";
 import { Input, Button } from "@chakra-ui/react";
 
-import "./Form.css";
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
+
+import { auth } from "../../firebase";
 
 function Form(props) {
   const [input, setInput] = useState("");
+  const [quantity, setQuantity] = useState("");
 
-  const inputRef = useRef(null);
+  const handleListChange = (event) => setInput(event.target.value);
 
-  useEffect(() => inputRef.current.focus());
+  const handleQuantityChange = (event) => setQuantity(event.target.value);
 
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
-
-  const handleOnSubmit = (event) => {
+  const handleOnSubmit = async (event) => {
     event.preventDefault();
 
-    props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
+    if (input === "")
+      return window.alert("Opps! Don't forget to label the item!");
+
+    const { uid } = auth.currentUser;
+
+    await props.itemsRef.add({
       text: input,
+      quantity: quantity === "" ? "1" : quantity,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid,
     });
 
     setInput("");
+    setQuantity("");
   };
 
   return (
@@ -33,13 +44,21 @@ function Form(props) {
     >
       <Input
         type="text"
-        placeholder="Add to list"
+        placeholder="Item"
         value={input}
         name="text"
         className="shopping-list-input"
-        onChange={handleChange}
-        ref={inputRef}
+        onChange={handleListChange}
       />
+      <Input
+        type="number"
+        placeholder="Quantity"
+        value={quantity}
+        name="text"
+        className="quantity-input"
+        onChange={handleQuantityChange}
+      />
+
       <Button
         type="button"
         className="shopping-list-button"

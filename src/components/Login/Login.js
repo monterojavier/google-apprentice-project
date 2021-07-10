@@ -1,21 +1,21 @@
 import React from "react";
-import { GoogleLogin } from "react-google-login";
+import GoogleButton from "react-google-button";
+
+import firebase from "firebase/app";
+import { auth } from "../../firebase";
 
 function Login() {
-  const responseGoogle = (response) => {
-    console.log(response);
+  const signInWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider);
   };
 
   return (
-    <div>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Log in with Google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-    </div>
+    <GoogleButton
+      onClick={signInWithGoogle}
+      type="dark"
+      label="Log in with Google"
+    />
   );
 }
 

@@ -1,15 +1,13 @@
 import React from "react";
-import { GoogleLogout } from "react-google-login";
+import GoogleButton from "react-google-button";
+
+import { auth } from "../../firebase";
 
 function Logout() {
   return (
-    <div>
-      <GoogleLogout
-        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-        buttonText="Logout"
-        // onLogoutSuccess={logout}
-      ></GoogleLogout>
-    </div>
+    auth.currentUser && (
+      <GoogleButton onClick={() => auth.signOut()} label="Sign out" />
+    )
   );
 }
 

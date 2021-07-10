@@ -1,25 +1,18 @@
+import "./App.css";
+
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
 import List from "./components/List/List";
 import Login from "./components/Login/Login";
 
-import "./App.css";
+import { auth } from "./firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function App() {
+  const [user] = useAuthState(auth);
+
   return (
     <ChakraProvider>
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route exact path="/shopping-list">
-              <List />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </div>
+      <div className="App">{user ? <List /> : <Login />}</div>
     </ChakraProvider>
   );
 }

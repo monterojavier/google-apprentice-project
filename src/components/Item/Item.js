@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import Form from "../Form/Form";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
   TableCaption,
+  Input,
 } from "@chakra-ui/react";
 
-function Item({ items, completeItem, removeItem, editItem }) {
+import "firebase/firestore";
+import "firebase/auth";
+
+function Item({ items, removeItem, editItem, editQuantity }) {
   const [edit, setEdit] = useState({
     id: null,
-    value: "",
+    text: "",
+    quantity: "",
   });
 
   const submitUpdate = (value) => {
@@ -34,7 +38,7 @@ function Item({ items, completeItem, removeItem, editItem }) {
   return (
     <Table>
       <TableCaption>
-        {items.length === 0
+        {!items
           ? "Lets add something to the list!"
           : items.length === 1
           ? "Just one thing?"
@@ -48,35 +52,43 @@ function Item({ items, completeItem, removeItem, editItem }) {
         </Tr>
       </Thead>
       <Tbody>
-        {items.map((item, index) => (
-          <Tr
-            className={item.isComplete ? "item-row complete" : "item-row"}
-            key={index}
-          >
-            <Td key={item.id} onClick={() => completeItem(item.id)}>
-              {item.text}
-            </Td>
-            <Td></Td> {/* This will be the quanity logic  */}
-            <Td className="icons">
-              <DeleteIcon
-                onClick={() => removeItem(item.id)}
-                className="delete-item"
-              />
-              <EditIcon
-                onClick={() => setEdit({ id: item.id, value: item.text })}
-                className="edit-item"
-              />
-            </Td>
-          </Tr>
-        ))}
+        {items &&
+          items.map((item, index) => (
+            <Tr
+              className={item.isComplete ? "item-row complete" : "item-row"}
+              key={index}
+            >
+              <Td key={item.id}>
+                <Input
+                  type="text"
+                  variant="unstyled"
+                  defaultValue={item.text}
+                  value={item.text}
+                  onChange={(event) => {
+                    editItem(item.id, event.target.value);
+                  }}
+                />
+              </Td>
+              <Td>
+                <Input
+                  type="number"
+                  variant="unstyled"
+                  defaultValue={item.quantity}
+                  value={item.quantity}
+                  onChange={(event) => {
+                    editQuantity(item.id, event.target.value);
+                  }}
+                />
+              </Td>
+              <Td className="icons">
+                <DeleteIcon
+                  onClick={() => removeItem(item.id, items)}
+                  className="delete-item"
+                />
+              </Td>
+            </Tr>
+          ))}
       </Tbody>
-      <Tfoot>
-        <Tr>
-          <Th>Items</Th>
-          <Th>Quantity</Th>
-          <Th></Th>
-        </Tr>
-      </Tfoot>
     </Table>
   );
 }
