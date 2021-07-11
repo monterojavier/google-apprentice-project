@@ -1,1 +1,7 @@
+.item-component-box {
+  height: 100vh;
+}
 
+.item-table {
+  max-height: 100vh;
+}

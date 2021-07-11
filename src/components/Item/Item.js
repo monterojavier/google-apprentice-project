@@ -1,20 +1,15 @@
 import React, { useState } from "react";
+import "./Item.css";
 import Form from "../Form/Form";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { motion, AnimatePresence } from "framer-motion";
 
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  Input,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Input, Box } from "@chakra-ui/react";
 
 import "firebase/firestore";
 import "firebase/auth";
+
+const MotionTr = motion(Tr);
 
 function Item({ items, removeItem, editItem, editQuantity }) {
   const [edit, setEdit] = useState({
@@ -36,60 +31,65 @@ function Item({ items, removeItem, editItem, editQuantity }) {
   }
 
   return (
-    <Table>
-      <TableCaption>
-        {!items
-          ? "Lets add something to the list!"
-          : items.length === 1
-          ? "Just one thing?"
-          : "Yass! Much better! "}
-      </TableCaption>
-      <Thead>
-        <Tr>
-          <Th>Items</Th>
-          <Th>Quantity</Th>
-          <Th></Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {items &&
-          items.map((item, index) => (
-            <Tr
-              className={item.isComplete ? "item-row complete" : "item-row"}
-              key={index}
-            >
-              <Td key={item.id}>
-                <Input
-                  type="text"
-                  variant="unstyled"
-                  defaultValue={item.text}
-                  value={item.text}
-                  onChange={(event) => {
-                    editItem(item.id, event.target.value);
+    <Box className="item-component-box">
+      <Table className="item-table" variant="simple" borderRadius="md">
+        <Thead>
+          <Tr>
+            <Th>Items</Th>
+            <Th>Quantity</Th>
+            <Th></Th>
+          </Tr>
+        </Thead>
+        <Tbody className="item-tbody">
+          <AnimatePresence>
+            {items &&
+              items.map((item, index) => (
+                <MotionTr
+                  variants={{
+                    visible: { opacity: 1 },
+                    hidden: { opacity: 0 },
                   }}
-                />
-              </Td>
-              <Td>
-                <Input
-                  type="number"
-                  variant="unstyled"
-                  defaultValue={item.quantity}
-                  value={item.quantity}
-                  onChange={(event) => {
-                    editQuantity(item.id, event.target.value);
-                  }}
-                />
-              </Td>
-              <Td className="icons">
-                <DeleteIcon
-                  onClick={() => removeItem(item.id, items)}
-                  className="delete-item"
-                />
-              </Td>
-            </Tr>
-          ))}
-      </Tbody>
-    </Table>
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ ease: "easeIn", delay: 0.25 }}
+                  exit={{ opacity: 0 }}
+                  className={item.isComplete ? "item-row complete" : "item-row"}
+                  key={index}
+                >
+                  <Td key={item.id}>
+                    <Input
+                      type="text"
+                      variant="unstyled"
+                      defaultValue={item.text}
+                      value={item.text}
+                      onChange={(event) =>
+                        editItem(item.id, event.target.value)
+                      }
+                    />
+                  </Td>
+                  <Td>
+                    <Input
+                      type="number"
+                      variant="unstyled"
+                      defaultValue={item.quantity}
+                      value={item.quantity}
+                      onChange={(event) => {
+                        editQuantity(item.id, event.target.value);
+                      }}
+                    />
+                  </Td>
+                  <Td className="icons">
+                    <DeleteIcon
+                      onClick={() => removeItem(item.id, items)}
+                      className="delete-item"
+                    />
+                  </Td>
+                </MotionTr>
+              ))}
+          </AnimatePresence>
+        </Tbody>
+      </Table>
+    </Box>
   );
 }
 
