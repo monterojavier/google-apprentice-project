@@ -33,7 +33,7 @@ function Form(props) {
 
     await props.listRef.add({
       text: input,
-      quantity: quantity === "" ? "1" : quantity,
+      quantity: quantity === "" || quantity < "1" ? "1" : quantity,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
     });
@@ -43,11 +43,7 @@ function Form(props) {
   };
 
   return (
-    <form
-      type="submit"
-      className="shopping-list-form"
-      onSubmit={handleOnSubmit}
-    >
+    <form className="shopping-list-form" onSubmit={handleOnSubmit}>
       <Input
         type="text"
         placeholder="Item"
@@ -66,9 +62,9 @@ function Form(props) {
       />
 
       <Button
+        type="submit"
         size="md"
         width="140px"
-        type="button"
         className="shopping-list-button"
         colorScheme="green"
         onClick={handleOnSubmit}

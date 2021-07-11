@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "../Form/Form";
-import Item from "../Item/Item";
+import Items from "../Items/Items";
 import { Box } from "@chakra-ui/react";
 import { firestore } from "../../firebase";
 
@@ -34,7 +34,7 @@ function List(user) {
       <Box className="shopping-list-form">
         <Form listRef={listRef} />
       </Box>
-      <Item
+      <Items
         items={items}
         removeItem={removeItem}
         editItem={editItem}
