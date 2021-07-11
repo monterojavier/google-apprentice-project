@@ -2,6 +2,8 @@ import "./Form.css";
 
 import React, { useState } from "react";
 import { Input, Button } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import swal from "sweetalert";
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -21,7 +23,11 @@ function Form(props) {
     event.preventDefault();
 
     if (input === "")
-      return window.alert("Opps! Don't forget to label the item!");
+      return swal({
+        text: "Opps! Don't forget to label the item!",
+        icon: "warning",
+        timer: 3000,
+      });
 
     const { uid } = auth.currentUser;
 
@@ -65,7 +71,7 @@ function Form(props) {
         colorScheme="green"
         onClick={handleOnSubmit}
       >
-        Add
+        <AddIcon />
       </Button>
     </form>
   );
