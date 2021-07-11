@@ -17,11 +17,12 @@
     "react-firebase-hooks": "^3.0.4",
     "react-google-button": "^0.7.2",
     "react-scripts": "4.0.3",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && firebase deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
