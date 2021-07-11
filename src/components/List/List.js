@@ -9,30 +9,30 @@ import "./List.css";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 function List(user) {
-  const itemsRef = firestore
+  const listRef = firestore
     .collection("Users")
     .doc(user.user.uid)
-    .collection("Items");
-  const queryItems = itemsRef.orderBy("createdAt");
+    .collection("List");
+  const queryItems = listRef.orderBy("createdAt");
 
   const [items] = useCollectionData(queryItems, { idField: "id" });
 
   const removeItem = async (id) => {
-    await itemsRef.doc(id).delete();
+    await listRef.doc(id).delete();
   };
 
   const editItem = async (id, text) => {
-    await itemsRef.doc(id).update({ text: text });
+    await listRef.doc(id).update({ text: text });
   };
 
   const editQuantity = async (id, quantity) => {
-    await itemsRef.doc(id).update({ quantity: quantity });
+    await listRef.doc(id).update({ quantity: quantity });
   };
 
   return (
     <Box id="list">
       <Box className="shopping-list-form">
-        <Form itemsRef={itemsRef} />
+        <Form listRef={listRef} />
       </Box>
       <Item
         items={items}

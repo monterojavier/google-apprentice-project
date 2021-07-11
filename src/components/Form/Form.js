@@ -31,7 +31,7 @@ function Form(props) {
 
     const { uid } = auth.currentUser;
 
-    await props.itemsRef.add({
+    await props.listRef.add({
       text: input,
       quantity: quantity === "" ? "1" : quantity,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),

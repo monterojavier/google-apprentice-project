@@ -4,7 +4,6 @@ import { ChakraProvider, Box, Button, VStack } from "@chakra-ui/react";
 import List from "./components/List/List";
 import Logout from "./components/Logout/Logout";
 import Login from "./components/Login/Login";
-import Navbar from "./components/Navbar/Navbar";
 
 import { firestore } from "./firebase";
 import swal from "sweetalert";
@@ -32,10 +31,10 @@ function App() {
 
     if (!alertVal) return;
 
-    const itemsRef = firestore.collection(`Users/${user.uid}/Items`);
-    const queryItems = itemsRef.orderBy("createdAt").limit(30);
+    const listRef = firestore.collection(`Users/${user.uid}/List`);
+    const queryList = listRef.orderBy("createdAt").limit(30);
 
-    const snapshot = await queryItems.get();
+    const snapshot = await queryList.get();
     const batchSize = snapshot.size;
     if (batchSize === 0) {
       // When there are no documents left, we are done
@@ -58,7 +57,7 @@ function App() {
 
   return (
     <ChakraProvider>
-      <Box className={!user ? "login" : "App"}>
+      <Box className="App">
         {user ? (
           <div>
             <Box className="columns">
@@ -68,6 +67,7 @@ function App() {
               </Box>
               <Box className="app-logout sub-column-3">
                 <VStack spacing="24px">
+                  <Logout />
                   <Button
                     colorScheme="red"
                     rightIcon={<WarningIcon />}
@@ -75,7 +75,6 @@ function App() {
                   >
                     Clear List
                   </Button>
-                  <Logout />
                 </VStack>
               </Box>
             </Box>

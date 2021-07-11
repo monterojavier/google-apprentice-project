@@ -2,14 +2,14 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDjFCm94d29CG1GKPYjDl6mXSpgOPpvY0k",
-  authDomain: "shopping-list-319216.firebaseapp.com",
-  projectId: "shopping-list-319216",
-  storageBucket: "shopping-list-319216.appspot.com",
-  messagingSenderId: "547878507788",
-  appId: "1:547878507788:web:63c3fd53a808c368fbe529",
-  measurementId: "G-Z1Z1MPXVPY",
+var firebaseConfig = {
+  apiKey: "AIzaSyB_WmLTaaYqHIDHN9qdTdZ7LkysjcbY0qQ",
+  authDomain: "shopping-list-project-5498d.firebaseapp.com",
+  projectId: "shopping-list-project-5498d",
+  storageBucket: "shopping-list-project-5498d.appspot.com",
+  messagingSenderId: "630525146277",
+  appId: "1:630525146277:web:197501e66d8d09406a894c",
+  measurementId: "G-887B8FV5LB",
 };
 firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
