@@ -6,7 +6,13 @@ import { auth } from "../../firebase";
 function Logout() {
   return (
     auth.currentUser && (
-      <Button onClick={() => auth.signOut()} colorScheme="yellow">
+      <Button
+        size="md"
+        height="48px"
+        width="140px"
+        onClick={() => auth.signOut()}
+        colorScheme="yellow"
+      >
         Sign Out
       </Button>
     )

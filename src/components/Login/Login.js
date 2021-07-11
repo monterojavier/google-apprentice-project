@@ -7,6 +7,7 @@ import { auth } from "../../firebase";
 function Login() {
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
     auth.signInWithPopup(provider);
   };
 

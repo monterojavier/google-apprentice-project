@@ -66,6 +66,8 @@ function Form(props) {
       />
 
       <Button
+        size="md"
+        width="140px"
         type="button"
         className="shopping-list-button"
         colorScheme="green"
