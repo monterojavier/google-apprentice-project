@@ -24,8 +24,8 @@ const MotionTr = motion(Tr);
 const MotionInput = motion(Input);
 const MotionTBody = motion(Tbody);
 
-const colorStart = Color("#fff4ba");
-const colorEnd = Color("#fcd817");
+const colorStart = Color("#008DA3");
+const colorEnd = Color("#9108AF");
 
 function Items({ items, removeItem, editItem, editQuantity }) {
   const [edit, setEdit] = useState({
