@@ -1,6 +1,4 @@
-# Javier Montero's Google - Project Assignment
-
-## Project N - Shopping List
+# Javier Montero's Shopping List
 
 Build a simple webapp that provides users with an ability to keep track of a shopping list :scroll:
 
@@ -30,7 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-##### `yarn build`
+##### `npm build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
