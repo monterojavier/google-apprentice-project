@@ -2,6 +2,8 @@
   "name": "project-n",
   "version": "0.1.0",
   "private": true,
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -b main -d build",
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
     "@chakra-ui/react": "^1.6.4",
