@@ -3,8 +3,7 @@ body {
   font-family: "Lilita One", cursive !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("./img/background.jpeg") !important;
-  background-blend-mode: color-dodge;
+  background-color: #1a1b25 !important;
   display: flex;
   justify-content: center;
   max-height: 100vh;

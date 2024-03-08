@@ -20,14 +20,14 @@ import {
 import "firebase/firestore";
 import "firebase/auth";
 
-const MotionTr = motion(Tr);
-const MotionInput = motion(Input);
-const MotionTBody = motion(Tbody);
-
-const colorStart = Color("#008DA3");
-const colorEnd = Color("#9108AF");
-
 function Items({ items, removeItem, editItem, editQuantity }) {
+  const MotionTr = motion(Tr);
+  const MotionInput = motion(Input);
+  const MotionTBody = motion(Tbody);
+
+  const colorStart = Color("#008DA3");
+  const colorEnd = Color("#F0F2A6");
+
   const [edit, setEdit] = useState({
     id: null,
     text: "",
@@ -130,6 +130,12 @@ function Items({ items, removeItem, editItem, editQuantity }) {
                 <Td>
                   <MotionInput
                     whileHover={{ scale: 1.2 }}
+                    style={{
+                      color: colorStart
+                        .mix(colorEnd, (1 / items.length) * index)
+                        .hex(),
+                      position: "static",
+                    }}
                     type="number"
                     variant="unstyled"
                     defaultValue={item.quantity}
@@ -143,6 +149,12 @@ function Items({ items, removeItem, editItem, editQuantity }) {
                   <DeleteIcon
                     onClick={() => removeItem(item.id, items)}
                     className="delete-item"
+                    style={{
+                      color: colorStart
+                        .mix(colorEnd, (1 / items.length) * index)
+                        .hex(),
+                      position: "static",
+                    }}
                   />
                 </Td>
               </MotionTr>
